@@ -20,7 +20,7 @@ function Profile() {
                 alt="share_icon_mobileview"/>
     </div>
 
-      <div className="flex justify-center pt-8">
+      <div className="d-flex justify-content-center pt-5">
 
         <img id="profile__img"
          className="items-center"
@@ -72,9 +72,9 @@ function Profile() {
          >Contact Me</Link>
     </div>
 
-    <div className="profile_bottom">
-        <img src={slack} className="mr-3" alt="slack_icon"/>
-        <img src={github} className="ml-3"alt="github_icon"/>
+    <div className="d-flex profile_bottom justify-content-center my-3">
+        <img src={slack} className="mx-3" alt="slack_icon"/>
+        <img src={github} className="mx-3"alt="github_icon"/>
     </div>
 
     </div>
