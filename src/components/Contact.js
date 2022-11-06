@@ -1,5 +1,5 @@
 import {useState} from "react";
-import Toast from "react-bootstrap/Toast";
+import { Toast } from "react-bootstrap";
 
 const info = {
     firstName: "",
@@ -15,6 +15,8 @@ export const Contact = () => {
     //state to hold input values
     const [show, setShow] = useState(false);
     //state to show and hide toast notifications.
+    const [error, setError] = useState(false);
+    //state to handle input error messages
 
     let name = "CodedLibra";
 
@@ -41,7 +43,11 @@ export const Contact = () => {
                 message: ""
             });
             setCheckbox(false);
+            if(input.message.length>5){
             setShow(true);
+            }
+            setError(true);
+            
         }
     //handleSubmit() to prevent page refresh and clear input form.
 
@@ -58,22 +64,21 @@ export const Contact = () => {
             Hi there, contact me to ask me about anything you have in mind.
          </p>
 
-        <div className="position-fixed top-0 end-0 p-3">
+        <div className="position-fixed top-0 end-0 py-0 px-0 mx-0">
             <Toast onClose={() => setShow(false)}
+                // style={{color:"info"}}
+                className="text-success"
                 show={show} delay={4000} autohide>
+                <Toast.Header className="float-end">
                 <Toast.Body>
-                    <small>Contact Form Sent..</small>
-                    <button type="button"
-                    className="btn-close me-2 m-auto float-end"
-                    data-bs-dismiss="toast" 
-                    aria-label="Close">
-                    </button>
+                    <small>Contact Sent..</small>
                 </Toast.Body>
+                </Toast.Header>
             </Toast>
         </div>
 
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate>
         <div className="row mb-3">
             <div className="col-sm">
             <label htmlFor="firstName" className="mb-1 mt-4">
@@ -86,8 +91,13 @@ export const Contact = () => {
                 placeholder="Enter your first name"
                 value={input.firstName}
                 onChange={handleChange}
-                minLength={3}
+                minLength={2}
                 required/>
+
+            {error&&input.firstName.length<=2 ?
+              <div className="invalid text-danger"> 
+                Please enter a message.
+              </div> : ""}
             </div>
 
             <div className="col-sm">
@@ -103,6 +113,11 @@ export const Contact = () => {
                 onChange={handleChange}
                 minLength={3}
                 required/>
+
+            {error&&input.lastName.length<=2 ?
+              <div className="invalid text-danger"> 
+                Please enter a message.
+              </div> : ""}
             </div>
         </div>
 
@@ -118,7 +133,12 @@ export const Contact = () => {
                 placeholder="yourname@email.com"
                 onChange={handleChange}
                 minLength={3}
-                required/>   
+                required/> 
+
+            {error&&input.email.length<=2 ?
+              <div className="invalid text-danger"> 
+                Please enter a message.
+              </div> : ""}
         </div>
         
         <div>
@@ -137,9 +157,10 @@ export const Contact = () => {
                 required>
                 </textarea>
                 
-                <div className="invalid-feedback"> 
-                    Please enter a message.
-                </div>
+            {error&&input.message.length<=2 ?
+              <div className="invalid text-danger"> 
+                Please enter a message.
+              </div> : ""}
                 </div>
             
         <div className="form-check mb-3 mt-3">

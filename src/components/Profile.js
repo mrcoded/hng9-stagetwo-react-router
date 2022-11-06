@@ -50,7 +50,7 @@ function Profile() {
         >Zuri Books</a>
 
       <a id="book__python"
-       href="https://books.zuri.team/python-for-beginners?ref_id=adeola-ogundijo"
+       href="https://books.zuri.team/python-for-beginners?ref_id=CodedLibra"
         className="btn btn-block btn-link mb-3"
         >Python Books</a>
 
