@@ -141,11 +141,11 @@ textarea:focus:invalid {
   font-weight: 500;
 }
 
-.checkbox{
+/* .checkbox{
   background-color: #F9FAFB;
   border: 2px solid #1570EF;
   border-radius: 6px;
-}
+} */
 
 .footerLine {
   border-top: 1px solid #EAECF0;
@@ -174,5 +174,9 @@ textarea:focus:invalid {
  @media screen and (min-width: 580px) {
     .share_icon2 {
       display: none;
+    }
+    .contact-border {
+      padding-left: 20%;
+      padding-right: 20%;
     }
   }

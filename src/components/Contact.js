@@ -1,58 +1,77 @@
-import {useState} from "react"
+import {useState} from "react";
+import Toast from "react-bootstrap/Toast";
+
+const info = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: ""
+}; //variable to hold contact inputs
 
 export const Contact = () => {
+    const [checkbox, setCheckbox] = useState(false);
+    //state for checkbox
+    const [input, setInput] = useState(info);
+    //state to hold input values
+    const [show, setShow] = useState(false);
+    //state to show and hide toast notifications.
 
- const info = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        message: ""
-    };
+    let name = "CodedLibra";
 
- const [checkbox, setCheckbox] = useState(false);
- const [input, setInput] = useState(info);
-
- let name = "CodedLibra";
-
- const handleCheck = (e) => {
-     setCheckbox(e.target.checked);
- }
-
- const handleChange = (e) => {
-    setInput({
-        ...input,
-        [e.target.name] : e.target.value
-    })
- }
-
- const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleCheck = (e) => {
+        setCheckbox(e.target.checked);
+    }
+    //handleCheck() to hold boolean value for checkbox
+   
+    const handleChange = (e) => {
         setInput({
             ...input,
-            firstName: "",
-            lastName: "",
-            email: "",
-            message: ""
-        });
-        setCheckbox(false);
+            [e.target.name] : e.target.value
+        })
     }
+    //handleChange() to hold input change value
+    
+    const handleSubmit = (e) => {
+            e.preventDefault();
+            setInput({
+                ...input,
+                firstName: "",
+                lastName: "",
+                email: "",
+                message: ""
+            });
+            setCheckbox(false);
+            setShow(true);
+        }
+    //handleSubmit() to prevent page refresh and clear input form.
 
   return (
+ 
 
-    <div className="container px-5">
+    <div className="container-fluid-sm px-3 pt-5">
+      <div className="contact-border">
+        <h2 className="pb-2 mt-5"
+         style={{color:"#101828", fontSize:"36px"}}
+         >Contact Me</h2>
 
-    <h2 className="pb-2 mt-5">Contact Me</h2>
+         <p style={{color:"#475467", fontSize:"20px"}}>
+            Hi there, contact me to ask me about anything you have in mind.
+         </p>
 
-    <p>Hi there, contact me to ask me about anything you have in mind.</p>
-{/* 
-    <div class="position-fixed bottom-0 end-0 p-3">
-    <div id="btn__submit" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-body">
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        <small>Contact Form Sent..</small>
+        <div className="position-fixed top-0 end-0 p-3">
+            <Toast onClose={() => setShow(false)}
+                show={show} delay={4000} autohide>
+                <Toast.Body>
+                    <small>Contact Form Sent..</small>
+                    <button type="button"
+                    className="btn-close me-2 m-auto float-end"
+                    data-bs-dismiss="toast" 
+                    aria-label="Close">
+                    </button>
+                </Toast.Body>
+            </Toast>
         </div>
-     </div>
-    </div> */}
+
 
     <form onSubmit={handleSubmit}>
         <div className="row mb-3">
@@ -99,9 +118,7 @@ export const Contact = () => {
                 placeholder="yourname@email.com"
                 onChange={handleChange}
                 minLength={3}
-                required/>
-            
-    
+                required/>   
         </div>
         
         <div>
@@ -120,7 +137,7 @@ export const Contact = () => {
                 required>
                 </textarea>
                 
-                    <div className="invalid-feedback"> 
+                <div className="invalid-feedback"> 
                     Please enter a message.
                 </div>
                 </div>
@@ -146,7 +163,8 @@ export const Contact = () => {
             >Send message</button>
         </div>
     </form>
-    </div>
+  </div>
+</div>
 
   )
 }
